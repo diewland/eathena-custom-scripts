@@ -141,8 +141,11 @@ monk_in.gat,103,181,4	script	Kafra	791,{	//117
 			RentCart:
 				if(Zeny < 800) goto RCNeedZenys;
 				set Zeny,Zeny-800;
-				if((CheckCart)==0) goto NoSkill;
-				if((CheckCart)==1) goto GetCart;
+				if((BaseClass == Job_Merchant || BaseJob == Job_SuperNovice) && checkcart() == 0 && getskilllv("MC_PUSHCART")>0) {
+					goto GetCart;
+				}else{
+					goto NoSkill;
+				}
 
 				NoSkill:
 					mes "[Kafra]";
@@ -200,8 +203,7 @@ monk_in.gat,103,181,4	script	Kafra	791,{	//117
 //===================================================================================[ GOOD MAN ]
 // heal¢Õß≈ÿß·æ– ‚¥¬ µ√Ÿπ’Ë·À≈– 06/02/47 v.0.1
 // chage charactor to Deviruchi
-monk_in.gat,93,181,4	script	Healviruchi	738,		//736
-{
+monk_in.gat,93,181,4	script	Healviruchi	738,{		//736
 					if (countitem(923) <1)		goto		L_end;
 					if (countitem(923) < 100)		goto		L_require;
 					if (countitem(923) > 99)		goto		L_ok;
