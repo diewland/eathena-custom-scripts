@@ -1,0 +1,260 @@
+//	- High Class NPC change - 471014
+//	1. first you must rem(//) monster in gef_dun03.gat except "Doppleganger"
+//	2. change music of "gef_dun03.gat" in file "mp3nametable.txt" to "iq180.mp3"
+//	3. add this file in "map_athena.conf"
+//	4. change npc in "map_gm_dun.txt" the heal is Deviruchi ^^
+//
+//	471015 - update map propertie and add condition protect cheat for valkyrie
+//	471020 - bug when high novice change class before talking with the old man (a lot of skill point)
+//	471021 - remove condition for change a job to novice high (cause of job in lv99 , skillpoint is over)
+//======================================================================[ MAP ]======================//
+valkyrie.gat	mapflag	nomemo		dummy
+valkyrie.gat	mapflag	noteleport	dummy
+//======================================================================[ NPC ]======================//
+monk_test.gat,319,140,4	script	ชายชรา	766,{
+				if(HJ_step == 4)											goto L_exit;
+				if((HJ_step == 2) && (readparam(55) >= 40))						goto	L_valkyrie;
+				if((HJ_step == 1) && (getskilllv(1) == 9))							goto	L_HJOB1;
+				if(class < 7)												goto L_exit;
+				if((baselevel < 99) || (readparam(55) < 50))						goto L_exit;
+
+				mes		"[ชายชรา]";
+				mes		"โอ้.... เจ้ามีแสงนั้น...";
+				mes		"ข้ากะลังรอคอยผู้ที่มีแสงนี้อยู่";
+				mes		"เพื่อนำพาไปยังดินแดนศักดิ์สิทธ์...";
+				mes		"เจ้าต้องการที่จะแกร่งขึ้นไปกว่านี้หรือไม่?";
+				next;
+				menu	"นี่คือเหตุผลที่ข้ามาที่นี่",-,"โทดทีนะ...ข้าเข้ามาหลบ bapho เฉยๆ",L_Ngo;
+				mes		"[ชายชรา]";
+				mes		"สมปรารถณา....ณ บัดนี้.....";
+				next;
+
+				set HJ_step,1;
+				if(class == 7)		goto J_lord_k;
+				if(class == 8)		goto J_h_priest;
+				if(class == 9)		goto J_h_wizard;
+				if(class == 10)		goto J_whitesmith;
+				if(class == 11)		goto J_sniper;
+				if(class == 12)		goto J_ass_cross;
+				if(class == 14)		goto J_paladin;
+				if(class == 15)		goto J_champion;
+				if(class == 16)		goto J_professor;
+				if(class == 17)		goto J_stalker;
+				if(class == 18)		goto J_creator;
+				if(class == 19)		goto J_clown;
+				if(class == 20)		goto J_gypsy;
+
+				J_lord_k :			set HJ_lord_k,1;		goto L_novicehigh;
+				J_h_priest :		set HJ_h_priest,1;		goto L_novicehigh;
+				J_h_wizard :		set HJ_h_wizard,1;		goto L_novicehigh;
+				J_whitesmith :		set HJ_whitesmith,1;	goto L_novicehigh;
+				J_sniper :			set HJ_sniper,1;		goto L_novicehigh;
+				J_ass_cross :		set HJ_ass_cross,1;		goto L_novicehigh;
+				J_paladin :		set HJ_paladin,1;		goto L_novicehigh;
+				J_champion :		set HJ_champion,1;		goto L_novicehigh;
+				J_professor :		set HJ_professor,1;		goto L_novicehigh;
+				J_stalker :		set HJ_stalker,1;		goto L_novicehigh;
+				J_creator :		set HJ_creator,1;		goto L_novicehigh;
+				J_clown :			set HJ_clown,1;		goto L_novicehigh;
+				J_gypsy :			set HJ_gypsy,1;		goto L_novicehigh;
+
+L_novicehigh :		jobchange 24;
+				resetlvl;
+				mes		"[ชายชรา]";
+				mes		"จงกลับมาที่นี่อีกครั้ง";
+				mes		"เมื่อเจ้าสามารถเปลี่ยนอาชีพได้";
+				mes		"ขอให้เจ้าโชคดี";
+				next;
+				warp "prontera.gat",156,187;
+				close;
+		L_exit:	mes		"[ชายชรา]";
+				mes		"ข้างนอกมันเสียงเอะอะ อะไรกัน..";
+				mes		"ไม่รู้จักเกรงใจคนแก่กันบ้างเลยย";
+				mes		"เด็กสมัยนี้นิ.. -.-";
+				close;
+
+		L_HJOB1 :	mes		"[ชายชรา]";
+					mes		"ข้าจำได้...เราเคยเจอกันมาก่อน";
+					mes		"สีหน้าของเจ้าดูเข้มแข็งขึ้นมาก..";
+					next;
+					mes		"[ชายชรา]";
+					mes		"เจ้าคงพร้อมแล้วที่จะรับการทดสอบขั้นต่อไป...";
+					next;
+					menu	"แน่นอน ท่านผู้เฒ่า",-,"ข้าว่า novice ก็เท่ดีนะ",L_Ngo;
+					mes		"[ชายชรา]";
+					mes		"สมปรารถณา....ณ บัดนี้.....";
+					next;
+
+					set HJ_step,2;
+					if((HJ_lord_k == 1) || (HJ_paladin == 1))						goto J_sword;
+					if((HJ_h_wizard == 1) || (HJ_professor == 1))					goto J_wizard;
+					if((HJ_sniper == 1) || (HJ_clown == 1) || (HJ_gypsy == 1))		goto J_archer;
+					if((HJ_h_priest == 1) || (HJ_champion == 1))					goto J_acolyte;
+					if((HJ_whitesmith == 1) || (HJ_creator == 1))					goto J_merchant;
+					if((HJ_ass_cross == 1) || (HJ_stalker == 1))					goto J_thief;
+
+					J_sword :		jobchange 25;		goto L_class1high;
+					J_wizard :		jobchange 26;		goto L_class1high;
+					J_archer :	jobchange 27;		goto L_class1high;
+					J_acolyte :	jobchange 28;		goto L_class1high;
+					J_merchant :	jobchange 29;		goto L_class1high;
+					J_thief :		jobchange 30;		goto L_class1high;
+
+	L_class1high:		mes		"[ชายชรา]";
+					mes		"จงกลับมาที่นี่อีกครั้ง...";
+					mes		"เมื่อเจ้าพร้อมที่จะรับการเปลี่ยนอาชีพครั้งสุดท้าย";
+					mes		"";
+					mes		"ขอให้เจ้าโชคดี";
+					next;
+					warp "prontera.gat",156,187;
+					close;
+
+		L_Ngo:	mes		"[ชายชรา]";
+				mes		"โอ...เป็นเช่นนั้นรึ...";
+				mes		"ถ้าหากเจ้าต้องการแข็งแกร่งขึ้น";
+				mes		"จงกลับมาพบข้าที่นี่";
+				mes		"ขอให้เจ้าโชคดี...";
+				close;
+
+		L_valkyrie:	mes		"[ชายชรา]";
+					mes		"เจ้าทำได้จริงๆ";
+					mes		"ข้าจะพาเจ้าไปสู่ดินแดนศักดิ์สิทธ์";
+					mes		"ณ บัดนี้...";
+					next;
+					mes		"[ชายชรา]";
+					mes		"หลับตาสิ...";
+					next;
+					set HJ_step,3;
+					warp "valkyrie.gat",49,76; 		
+					close;
+}
+valkyrie.gat,49,82,4	script	Valkyrie	811,{
+				if(HJ_step != 3)										goto L_cheat;
+				mes		"[Valkyrie]";
+				mes		"ยินดีต้อนรับ "+strcharinfo(0)+"..";
+				mes		"ออร่าจากตัวของท่านทำให้ข้ารู้ว่าท่านมาเพื่อสิ่งใด";
+				next;
+				mes		"[Valkyrie]";
+				mes		"ท่านต้องสัญญากับข้าก่อนว่า";
+				mes		"จะนำมันไปใช้ในสิ่งที่ถูกต้อง";
+				mes		"...ท่านจะสัญญาได้หรือไม่?";
+				next;
+				menu	"แน่นอนที่สุด",-,"พยักหน้า (แขนไขว้หลัง นิ้วชี้ไขว้นิ้วกลาง)",L_Ngo;
+				set HJ_step,4;
+				if(HJ_lord_k == 1)		goto L_lord_k;
+				if(HJ_h_priest == 1)		goto L_h_priest;
+				if(HJ_h_wizard == 1)	goto L_h_wizard;
+				if(HJ_whitesmith == 1)	goto L_whitesmith;
+				if(HJ_sniper == 1)		goto L_sniper;
+				if(HJ_ass_cross == 1)	goto L_ass_cross;
+				if(HJ_paladin == 1)		goto L_paladin;
+				if(HJ_champion ==1)	goto L_champion;
+				if(HJ_professor == 1)	goto L_professor;
+				if(HJ_stalker == 1)		goto L_stalker;
+				if(HJ_creator == 1)		goto L_creator;
+				if(HJ_clown == 1)		goto L_clown;
+				if(HJ_gypsy == 1)		goto L_gypsy;
+L_lord_k :	 		jobchange 31;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น LordKnight สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_h_priest :		jobchange 32;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น High Priest สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_h_wizard :		jobchange 33;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น High Wizard สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_whitesmith :		jobchange 34;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น WhiteSmith สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_sniper :	 		jobchange 35;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น Sniper สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_ass_cross :		jobchange 36;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น Assassins Cross สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_paladin	:		jobchange 38;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น Paladin สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_champion :		jobchange 39;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น Champion สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_professor :		jobchange 40;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น Professor สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_stalker	:		jobchange 41;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น Stalker สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_creator	:		jobchange 42;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น Creator สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_clown :			jobchange 43;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น Clown สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_gypsy :			jobchange 44;		
+				announce strcharinfo(0) + " เปลี่ยนอาชีพเป็น Gypsy สำเร็จแล้ว " ,0;
+				goto L_goPron;
+L_goPron :		mes		"[Valkyrie]";
+				mes		"อย่าลืมคำสัญญาหล่ะ";
+				next;
+				warp "prontera.gat",156,187;
+				close;
+		L_Ngo:	mes		"[Valkyrie]";
+				mes		"ถ้ายังนั้น...ที่แห่งนี้คงเหมาะกับท่าน...";
+				next;
+				warp "gef_dun03.gat",38,39; 
+				close;
+		L_cheat:	mes		"[Valkyrie]";
+				mes		"ท่านมาถึงที่แห่งนี้โดยไม่ถูกต้อง";
+				mes		"ข้าจำเป็นต้องพาท่านกลับไปสู่เบื้องล่าง";
+				next;
+				warp "gl_cas02.gat",103,146; 
+				close;
+}
+//======================================================================[ MONSTERS ]==============//
+gef_dun03.gat,0,0,0	monster	Lord of Death	1373,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Dark Snake Lord	1418,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Dracular	1389,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Spirit of Samurai	1492,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Baphomet	1039,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Dark Lord	1272,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	StrommyKnight	1251,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Pharaoh	1157,1,3600000,6000000,0
+gef_dun03.gat,0,0,0	monster	Osiris	1038,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Maya	1147,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Drake	1112,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Orc Lord	1190,1,300000,600000,0
+gef_dun03.gat,0,0,0	monster	Orc Hero	1087,1,300000,600000,0
+//-----------------------------------------------------------------------------------------------------------------------[mons :: Rank A]
+gef_dun03.gat,0,0,0	monster	Bloody knight	1268,2
+gef_dun03.gat,0,0,0	monster	Abysmal knight	1219,2
+gef_dun03.gat,0,0,0	monster	Chimera	1283,2
+
+gef_dun03.gat,0,0,0	monster	Zombie Master		1298,2
+gef_dun03.gat,0,0,0	monster	Skeleton General	 1290,2
+gef_dun03.gat,0,0,0	monster	Archangeling	 1388,2
+
+gef_dun03.gat,0,0,0	monster	Mutant dragon	1262,3
+gef_dun03.gat,0,0,0	monster	Mini Demon	1292,3
+gef_dun03.gat,0,0,0	monster	Khalizburg	1132,3
+gef_dun03.gat,0,0,0	monster	Apocalips	1365,3
+gef_dun03.gat,0,0,0	monster	Nightmare Terror	1379,3
+gef_dun03.gat,0,0,0	monster	Wanderer	1208,3
+gef_dun03.gat,0,0,0	monster	Gryphon	1259,3
+
+gef_dun03.gat,0,0,0	monster	Injustice	1257,5
+gef_dun03.gat,0,0,0	monster	Incubus	1374,5
+gef_dun03.gat,0,0,0	monster	Succubus	 1370,5
+gef_dun03.gat,0,0,0	monster	Elder	1377,5
+gef_dun03.gat,0,0,0	monster	Lava Golem	1366,5
+gef_dun03.gat,0,0,0	monster	Stalatic Golem	1278,5
+gef_dun03.gat,0,0,0	monster	Carat 	1267,5
+gef_dun03.gat,0,0,0	monster	Joker	1131,5
+gef_dun03.gat,0,0,0	monster	Zombie Prisoner	1197,5
+gef_dun03.gat,0,0,0	monster	Skeleton Prisoner	1196,5
+gef_dun03.gat,0,0,0	monster	Wraith	1192,5
+gef_dun03.gat,0,0,0	monster	Ghoul	1036,5
+gef_dun03.gat,0,0,0	monster	Wind Ghost	1263,5
+gef_dun03.gat,0,0,0	monster	Dark Frame	1260,5
+
+gef_dun03.gat,0,0,0	monster	Antique Firelock	1403,10
+gef_dun03.gat,0,0,0	monster	Greatest General	1277,10

@@ -1,0 +1,126 @@
+//040147
+// NPC Super  NOvice  by ME
+//cheate new NPC charactor and Dialog 11/02/47
+//if((CheckCart)==0) goto NoCartSkill;
+//if((CheckCart)==1) goto GetCart;
+prontera.gat,151,189,5	script	Novice Master	729,{	//733
+	
+	if(Class == 23) goto L_SN_ON;
+	
+	mes "[Novice Master]";
+	mes "สวัสดี ต้องการให้ข้าช่วยอะไรไหม?";
+	next;
+	menu "สอบถามเกี่ยวกับ SuperNovice",L_Detail,"เปลี่ยนอาชีพเป็น SuperNovice",L_Job,"เปล่า...ไม่มีอะไร",L_Exit;
+
+	L_Detail:		mes "[Novice Master]";
+				mes "SuperNoice เป็นอาชีพระดับสูง";
+				mes "สามารถใช้ skill ต่างๆได้มากมาย";
+				mes "แต่หนทางการเป็นนั้นยากลำบาก";
+				mes "เพราะจะต้องเป็น Novice ที่มี BaseLv45 ขึ้นไปเท่านั้น";
+				close;
+
+	L_Job:		if(Class != 0) goto L_R_Nov;
+				if(BaseLevel < 45) goto L_R_BLv;
+
+				mes "[Novice Master]";
+				mes "ยินดีด้วย !!!";
+				mes "เจ้าได้เป็น Super Novice แล้ว...";
+				jobchange 23;
+				skill 248,10,0;		// add more HP for super Novice
+				// remark because in MX13 job Supernovice Over 50 (470629)
+				//next;
+				//mes "[Novice Master]";
+				//mes "เดี๋ยวก่อน...";
+				//mes "ข้าเห็นความตั้งใจของเจ้า";
+				//mes "ข้าแถม Skill Point ให้อีก 20 ละกัน";
+				//set SkillPoint,SkillPoint+20;
+				mes "โชคดีนะ...";
+				close;
+	
+	L_R_Nov:		mes "[Novice Master]";
+				mes "เสียใจด้วยเจ้าไม่ได้เป็น Novice แล้ว..";
+				close;
+
+	L_R_BLv:		mes "[Novice Master]";
+				mes "BaseLevel ของเจ้ายังน้อยเกินไป";
+				mes "พยายามเข้า ข้าจะคอยเอาใจช่วย";
+				close;
+
+	L_SN_ON:	mes "[Novice Master]";
+				mes "ว่าไงสหาย...";
+				mes "ต้องการให้ข้าช่วยอะไรไหม?";
+				next;
+				menu "ข้าอยากได้รถเข็นสักคัน",L_SN_Cart,"ข้ออยาก Fatalblow ซักป้าบ!!",L_SN_Stun,"เปล่า...ไม่มีอะไร",L_Exit;
+
+				L_SN_Cart:	//if((CheckCart)==0) goto NoPushcart;
+							mes "[Novice Master]";
+							mes "เอาไปเลย...รถเข็นของเจ้า";
+							mes "...(ข้าแถม skill เปลี่ยนรถเข็นให้ด้วย)";
+							setcart;
+							skill 154,1,0;
+							close;
+							//NoPushcart:	mes "[Novice Master]";
+							//			mes "ข้าก็อยากให้รถเข็นเจ้านะ";
+							//			mes "แต่เจ้ายังไม่มี skill pushCart เลย";
+							//			mes "ไว้เจ้ามี skill เมื่อไร มาเอารถเข็นไปเลย";
+							//			close;
+				L_SN_Stun:	//if (getskilllv(145)>0) goto LStartTwice;
+							if (countitem(1752)<10)	goto	Require_Item;
+							if (countitem(1751)<10)	goto	Require_Item;
+							if (countitem(532)<1)	goto	Require_Item;
+							if (countitem(962)<30)	goto	Require_Item;
+							if (countitem(526)<5)	goto	Require_Item;
+							mes "[Novice Master]";
+							delitem 1752,10;
+							delitem 1751,10;
+							delitem 532,1;
+							delitem 962,30;
+							delitem 526,5;
+							skill 145,1,0;
+							mes "เรียบร้อย...เจ้าได้เรียนรู้ทักษะนี้แล้ว";
+							mes "ขอให้เจ้าใช้มันในสิ่งที่ถูกที่ควรนะ";
+							close;
+							//LStartTwice:	mes "[Novice Master]";
+							//			mes "เจ้ามี skill นี่อยู่แล้วนิ";
+							//			mes "การ getSkill 2 ทีไม่ได้ช่วยให้ damage เพิ่มขึ้นหรอกนะ";
+							//			close;
+							Require_Item:	mes "[Novice Master]";
+										mes "ข้าต้องการของในการผึกทักษะดังนี้";
+										mes " 10 Fire Arrows";
+										mes " 10 Silver Arrows";
+										mes " 1 Banana Juice";
+										mes " 30 Tentacle";
+										mes " 5 Royal Jelly";
+										mes "หาได้ครบแล้วค่อยมาใหม่นะ";
+										close;
+//#######[ Trust ]##########
+//				L_SN_Trust:	if (countitem(1551)<1)	goto	Require_Item2;		// bible	x 1
+//							if (countitem(2608)<1)	goto	Require_Item2;		// rosary	x 1
+//							if (countitem(7005)<30)	goto	Require_Item2;		// skull x 30
+//							if (countitem(957)<50)	goto	Require_Item2;		// decayed nail x 50
+//							mes "[Novice Master]";
+//							delitem 1551,1;
+//							delitem 2608,1;
+//							delitem 7005,30;
+//							delitem 957,50;
+//							skill 248,1,0;								//Trust
+//							mes "เรียบร้อย...เจ้าได้เรียนรู้ทักษะนี้แล้ว";
+//							mes "ขอให้เจ้าใช้มันในสิ่งที่ถูกที่ควรนะ";
+//							close;
+//							//LStartTwice:	mes "[Novice Master]";
+//							//			mes "เจ้ามี skill นี่อยู่แล้วนิ";
+//							//			mes "การ getSkill 2 ทีไม่ได้ช่วยให้ damage เพิ่มขึ้นหรอกนะ";
+//							//			close;
+//							Require_Item2:	mes "[Novice Master]";
+//										mes "ข้าต้องการของในการผึกทักษะดังนี้";
+//										mes " 1 Bible";
+//										mes " 1 Rosary";
+//										mes " 30 Skull";
+//										mes " 50 Decayed Nail";
+//										mes "หาได้ครบแล้วค่อยมาใหม่นะ";
+//										close;
+//+++++++++++
+	L_Exit:		mes "[Novice Master]";
+				mes "งั้นก็โชคดีนะ";
+				close;
+	}

@@ -1,0 +1,347 @@
+// Zeny Transfer ## by Me ## 05/04/47 (X0X")~
+//------------------------------------------------------------------------------------------------------------------------------------------->
+prontera.gat,166,206,5	script	Zeny Manager		743,{	
+	
+		mes "[Zeny Manager]";
+		mes	"ยินดีต้อนรับสู่บริการ Zeny Magic";
+		mes "คุณสามารถโอนเงิน";
+		mes "ไปยังตัวละครตัวอื่นได้";
+		next;
+		mes "[Zeny Manager]";
+		mes "เพียงคุณเลือกช่องบริการจาก 4 ช่อง";
+		mes "กรอกจำนวนเงินและ password";
+		mes "**password เป็นเลขจำนวนเต็มเท่านั้น";
+		next;
+		mes "[Zeny Manager]";
+		mes "แล้วสามารถนำตัวละครที่รู้ password";
+		mes "มาเบิกเงินออกได้ทันทีคับ";
+		close;
+
+		onInit:
+		set $bank_money1,0;		set $bank_password1,0;		set $bank1_on,0;		
+		set $bank_money2,0;		set $bank_password2,0;		set $bank2_on,0;				
+		set $bank_money3,0;		set $bank_password3,0;		set $bank3_on,0;		
+		set $bank_money4,0;		set $bank_password4,0;		set $bank4_on,0;		
+		end;
+}
+//------------------------------------------------------------------------------------------------------------------------------------------->
+prontera.gat,162,202,5	script	Service No.1			776,{	
+
+				if($bank1_on!=0) goto L_Hold;
+
+				menu	"ใช้บริการ",L_Yes,"ออกจากบริการ",L_out;
+
+				L_Yes:
+				mes "[Service No.1]";
+				mes	"กรอกจำนวนเงินที่จะฝากคับ";
+				next;
+				L_again:
+				input @money1;
+				if(@money1>zeny) goto L_over;
+				if(@money1<=0) goto L_No;
+				set $bank_money1,@money1;
+
+				mes "[Service No.1]";
+				mes	"กรอก Password";
+				mes "**เป็นเลขจำนวนเต็มเท่านั้น";
+				next;
+				input @password1;
+				if(@password1==0) goto L_Yes;
+				set $bank_password1,@password1;
+				set zeny,zeny-@money1;
+	
+				mes "[Service No.1]";
+				mes	"ขอบคุณที่ใช้บริการคับ";
+				set $bank1_on,1;				
+				waitingroom "No1 :เต็ม",0;	
+				close;
+
+				L_over:
+				mes "[Service No.1]";
+				mes	"คุณกรอกจำนวนเงินเกินคับ";
+				mes "กรุณากรอกใหม่อีกครั้ง";
+				next;
+				goto L_again;
+
+				L_No:
+				mes "[Service No.1]";
+				mes	"แล้วพบกันใหม่คับ";
+				close;
+
+				L_out : close;
+
+				L_Hold:
+				mes "[Service No.1]";
+				mes "ตอนนี้มีเงินอยู่ในระบบ ^0033FF"+$bank_money1+" ^000000zeny";
+				mes	"คุณมี Password หรือไม่??";
+				next;
+				menu	"มี",L_Yeah,"ไม่มี",L_No;
+
+				L_Yeah:
+				mes "[Service No.1]";
+				mes	"กรุณาใส่ Password คับ";
+				next;
+				input @password1;
+
+				if(@password1!=$bank_password1) goto L_Bye;
+				set zeny,zeny+$bank_money1;
+
+				mes "[Service No.1]";
+				mes "การโอนเงินเรียบร้อย";
+				mes	"ขอบคุณที่ใช้บริการคับ";
+				set $bank_money1,0;
+				set $bank_password1,0;
+				set $bank1_on,0;
+				waitingroom "No1 : ว่าง",0;
+				close;
+
+				L_Bye:
+				mes "[Service No.1]";
+				mes	"Password ไม่ถูกต้องคับ";
+				close;
+
+				onInit:
+				waitingroom "No1 : ว่าง",0;
+				end;
+}
+//------------------------------------------------------------------------------------------------------------------------------------------->
+prontera.gat,163,203,5	script	Service No.2			776,{	
+
+				if($bank2_on!=0) goto L_Hold;
+
+				menu	"ใช้บริการ",L_Yes,"ออกจากบริการ",L_out;
+
+				L_Yes:
+				mes "[Service No.2]";
+				mes	"กรอกจำนวนเงินที่จะฝากคับ";
+				next;
+				L_again:
+				input @money2;
+				if(@money2>zeny) goto L_over;
+				if(@money2<=0) goto L_No;
+				set $bank_money2,@money2;
+
+				mes "[Service No.2]";
+				mes	"กรอก Password";
+				mes "**เป็นเลขจำนวนเต็มเท่านั้น";
+				next;
+				input @password2;
+				if(@password2==0) goto L_Yes;
+				set $bank_password2,@password2;
+				set zeny,zeny-@money2;
+	
+				mes "[Service No.2]";
+				mes	"ขอบคุณที่ใช้บริการคับ";
+				set $bank2_on,1;				
+				waitingroom "No2 :เต็ม",0;	
+				close;
+
+				L_over:
+				mes "[Service No.2]";
+				mes	"คุณกรอกจำนวนเงินเกินคับ";
+				mes "กรุณากรอกใหม่อีกครั้ง";
+				next;
+				goto L_again;
+
+				L_No:
+				mes "[Service No.2]";
+				mes	"แล้วพบกันใหม่คับ";
+				close;
+
+				L_out : close;
+
+				L_Hold:
+				mes "[Service No.2]";
+				mes "ตอนนี้มีเงินอยู่ในระบบ ^0033FF"+$bank_money2+" ^000000zeny";
+				mes	"คุณมี Password หรือไม่??";
+				next;
+				menu	"มี",L_Yeah,"ไม่มี",L_No;
+
+				L_Yeah:
+				mes "[Service No.2]";
+				mes	"กรุณาใส่ Password คับ";
+				next;
+				input @password2;
+
+				if(@password2!=$bank_password2) goto L_Bye;
+				set zeny,zeny+$bank_money2;
+
+				mes "[Service No.2]";
+				mes "การโอนเงินเรียบร้อย";
+				mes	"ขอบคุณที่ใช้บริการคับ";
+				set $bank_money2,0;
+				set $bank_password2,0;
+				set $bank2_on,0;
+				waitingroom "No2 : ว่าง",0;
+				close;
+
+				L_Bye:
+				mes "[Service No.2]";
+				mes	"Password ไม่ถูกต้องคับ";
+				close;
+
+				onInit:
+				waitingroom "No2 : ว่าง",0;
+				end;
+}
+//------------------------------------------------------------------------------------------------------------------------------------------->
+prontera.gat,164,204,5	script	Service No.3			776,{	
+
+				if($bank3_on!=0) goto L_Hold;
+
+				menu	"ใช้บริการ",L_Yes,"ออกจากบริการ",L_out;
+
+				L_Yes:
+				mes "[Service No.3]";
+				mes	"กรอกจำนวนเงินที่จะฝากคับ";
+				next;
+				L_again:
+				input @money3;
+				if(@money3>zeny) goto L_over;
+				if(@money3<=0) goto L_No;
+				set $bank_money3,@money3;
+
+				mes "[Service No.3]";
+				mes	"กรอก Password";
+				mes "**เป็นเลขจำนวนเต็มเท่านั้น";
+				next;
+				input @password3;
+				if(@password3==0) goto L_Yes;
+				set $bank_password3,@password3;
+				set zeny,zeny-@money3;
+	
+				mes "[Service No.3]";
+				mes	"ขอบคุณที่ใช้บริการคับ";
+				set $bank3_on,1;				
+				waitingroom "No3 :เต็ม",0;	
+				close;
+
+				L_over:
+				mes "[Service No.3]";
+				mes	"คุณกรอกจำนวนเงินเกินคับ";
+				mes "กรุณากรอกใหม่อีกครั้ง";
+				next;
+				goto L_again;
+
+				L_No:
+				mes "[Service No.3]";
+				mes	"แล้วพบกันใหม่คับ";
+				close;
+
+				L_out : close;
+
+				L_Hold:
+				mes "[Service No.3]";
+				mes "ตอนนี้มีเงินอยู่ในระบบ ^0033FF"+$bank_money3+" ^000000zeny";
+				mes	"คุณมี Password หรือไม่??";
+				next;
+				menu	"มี",L_Yeah,"ไม่มี",L_No;
+
+				L_Yeah:
+				mes "[Service No.3]";
+				mes	"กรุณาใส่ Password คับ";
+				next;
+				input @password3;
+
+				if(@password3!=$bank_password3) goto L_Bye;
+				set zeny,zeny+$bank_money3;
+
+				mes "[Service No.3]";
+				mes "การโอนเงินเรียบร้อย";
+				mes	"ขอบคุณที่ใช้บริการคับ";
+				set $bank_money3,0;
+				set $bank_password3,0;
+				set $bank3_on,0;
+				waitingroom "No3 : ว่าง",0;
+				close;
+
+				L_Bye:
+				mes "[Service No.3]";
+				mes	"Password ไม่ถูกต้องคับ";
+				close;
+
+				onInit:
+				waitingroom "No3 : ว่าง",0;
+				end;
+}
+//------------------------------------------------------------------------------------------------------------------------------------------->
+prontera.gat,165,205,5	script	Service No.4			776,{	
+
+				if($bank4_on!=0) goto L_Hold;
+
+				menu	"ใช้บริการ",L_Yes,"ออกจากบริการ",L_out;
+
+				L_Yes:
+				mes "[Service No.4]";
+				mes	"กรอกจำนวนเงินที่จะฝากคับ";
+				next;
+				L_again:
+				input @money4;
+				if(@money4>zeny) goto L_over;
+				if(@money4<=0) goto L_No;
+				set $bank_money4,@money4;
+
+				mes "[Service No.4]";
+				mes	"กรอก Password";
+				mes "**เป็นเลขจำนวนเต็มเท่านั้น";
+				next;
+				input @password4;
+				if(@password4==0) goto L_Yes;
+				set $bank_password4,@password4;
+				set zeny,zeny-@money4;
+	
+				mes "[Service No.4]";
+				mes	"ขอบคุณที่ใช้บริการคับ";
+				set $bank4_on,1;				
+				waitingroom "No4 :เต็ม",0;	
+				close;
+
+				L_over:
+				mes "[Service No.4]";
+				mes	"คุณกรอกจำนวนเงินเกินคับ";
+				mes "กรุณากรอกใหม่อีกครั้ง";
+				next;
+				goto L_again;
+
+				L_No:
+				mes "[Service No.4]";
+				mes	"แล้วพบกันใหม่คับ";
+				close;
+
+				L_out : close;
+
+				L_Hold:
+				mes "[Service No.4]";
+				mes "ตอนนี้มีเงินอยู่ในระบบ ^0033FF"+$bank_money4+" ^000000zeny";
+				mes	"คุณมี Password หรือไม่??";
+				next;
+				menu	"มี",L_Yeah,"ไม่มี",L_No;
+
+				L_Yeah:
+				mes "[Service No.4]";
+				mes	"กรุณาใส่ Password คับ";
+				next;
+				input @password4;
+
+				if(@password4!=$bank_password4) goto L_Bye;
+				set zeny,zeny+$bank_money4;
+
+				mes "[Service No.4]";
+				mes "การโอนเงินเรียบร้อย";
+				mes	"ขอบคุณที่ใช้บริการคับ";
+				set $bank_money4,0;
+				set $bank_password4,0;
+				set $bank4_on,0;
+				waitingroom "No4 : ว่าง",0;
+				close;
+
+				L_Bye:
+				mes "[Service No.4]";
+				mes	"Password ไม่ถูกต้องคับ";
+				close;
+
+				onInit:
+				waitingroom "No4 : ว่าง",0;
+				end;
+}
+//------------------------------------------------------------------------------------------------------------------------------------------->

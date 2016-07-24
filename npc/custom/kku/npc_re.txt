@@ -1,0 +1,41 @@
+alberta.gat,35,240,4	script	Reset Master	124,{	//56
+	mes "[Reset Master]";
+	mes "Welcome, I am here to offer services:";
+	mes "1) 100,000z Status reset";
+	mes "2) 100,000z Skills reset";
+	next;
+	menu "^3355FF'Skill and Stat Service'^000000?",L0,"^FF3355Reset Stats^000000",L2,"^FF3355Reset Skills^000000",L1,"Quit",LEnd;
+
+	L0:
+		mes "[Reset Master]";
+		mes "Please unequip all items and store everything in Kafra storage so that your weight becomes ^3355FF0^000000.";
+		mes "After you weight has become 0, Skill and Stat Reset service will be provided.";
+		mes "For your infomation, ^3355FFNovice class can't use this service^000000.";
+		close;
+	L1:
+		if (Zeny<100000) goto NeedZenys;
+		mes "[Character Admin]";
+		mes "Alright, here we go now.. Remember, changed what take affect until you log back on!";
+		set Zeny, Zeny-100000;
+		resetskill;
+		close;
+	L2:
+		if (Zeny<100000) goto NeedZenys;
+		mes "[Character Admin]";
+		mes "Alright, here we go now.. Remember, changed what take affect until you log back on!";
+		set Zeny,Zeny-100000;
+		resetstatus;
+		close;
+
+		NeedZenys:
+		mes "[Character Admin]";
+		mes "Sorry. you don't have enough Money.";
+		close;
+LEnd:
+		close;
+
+	EmpInv:
+		mes "[Reset Master]";
+		mes "If you are carrying items with you, please store all into ^0000FF'Kafra'^000000 Warehouse for you safety.";
+		close;
+}

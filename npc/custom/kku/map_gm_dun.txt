@@ -1,0 +1,242 @@
+//2/4/2547//==================================================================[mons :: Rank S]
+//3600000,7200000,0 => 300000,600000 [P' JO]
+//471030  - disable kafra in this map [ protect copy item ]
+//	- disable miniboss
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =//
+prt_monk.gat,0,0,0	monster	เจ๊โอ		1038,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	กะเด้ง	1086,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	มารยา	1147,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	ฟีโรนี่		1159,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	เดรค		1112,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	ฮีโร่คุง	1087,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	เอ็ดกรู้	1115,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	ดอปเปอร์แกง(เขียวหวาน)	 1046,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	ลุงแพะ	1039,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	สโตรมมี่	1251,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	ผู้เฒ่าเต่า	1312,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	ผึ้งน้อย	1059,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	อ๊อคหลอด	1190,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	แกรม		1252,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	ด๊ากหลอด	1272,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	ทวดแดรค	1389,1,300000,600000,0
+prt_monk.gat,0,0,0	monster	น้องเหมียว	1150,1,300000,600000,0
+//prt_monk.gat,0,0,0	monster	ลุงหลอด	1373,1,300000,600000,0
+//==================================================================[mons :: Rank A]
+//prt_monk.gat,0,0,0	monster	อาบีส 	1219,1
+//prt_monk.gat,0,0,0	monster	วานเดอร์แมน	1208,1
+//==================================================================[mons :: Rank m-B]
+//prt_monk.gat,0,0,0	monster	ดาก้อนฟาย	1091,1,300000,600000,0
+//prt_monk.gat,0,0,0	monster	เพื่อนรัก	1120,1,300000,600000,0
+//prt_monk.gat,0,0,0	monster	มาสตูริ่ง	1090,1,300000,600000,0
+//prt_monk.gat,0,0,0	monster	บ๊อกๆ	1092,1,300000,600000,0
+//prt_monk.gat,0,0,0	monster	แองเจอลิ่ง	1096,1,300000,600000,0
+//prt_monk.gat,0,0,0	monster	กระต่ายฟ้า	1093,1,300000,600000,0
+//prt_monk.gat,0,0,0	monster	โตรด	1089,1,300000,600000,0
+//==================================================================[mons :: Rank C]
+//prt_monk.gat,0,0,0	monster	เรเควียม	1164,5
+//prt_monk.gat,0,0,0	monster	โชฮี	1170,5
+//prt_monk.gat,0,0,0	monster	มาตีน	1145,5
+//prt_monk.gat,0,0,0	monster	หมี หมี	1060,10
+//prt_monk.gat,0,0,0	monster	อู๊ด อู๊ด	1167,10
+//prt_monk.gat,0,0,0	monster	วิสเปอร์	1179,10
+//prt_monk.gat,0,0,0	monster	ค้อก ค้อก	1166,10
+//prt_monk.gat,0,0,0	monster	อานโตนิโอ	1247,20
+//===================================================================================[ Kafra Warp ]
+monk_in.gat,102,181,4	script	พนักงานวาป	721,{
+	cutin "kafra_07",2;
+	mes "[พนักงานวาป]";
+	mes "สวัสดี,";
+	mes "ข้าสามารถวาปท่านไปทุกเมืองและทุก Dungeon";
+	mes "ท่านต้องการไปที่ไหนล่ะ?";
+	next;
+	menu "Towns",stadt,"Dungeons",dungeon;
+	
+	stadt:
+	menu "Alberta",walberta,"Aldebaran",waldebaran,"Amatsu",wamatsu,"Comodo",wcomodo,"Geffen",wgeffen,"Gonryun",wgonryun,"Izlude",wizlude,"Lutie",wxmas,"Morroc",wMorroc,"Niflheim",wniflheim,"Payon",wpayon,"Prontera",wprontera,"Umbala",wumbala,"Yuno",wyuno;
+	
+	dungeon:
+	menu "Anthell",dant,"Bibilan Dungeon",dbibilan,"Coal Mine (Dead Pit)",dcoal,"Culvert",dculvert,"Glast Heim",dglast,"Magma-Dungeon",dmagma,"Orc-Dungeon",dorc,"Payon-Dungeon",dpayon,"Pyramids",dpyramids,"Sphinx",dsphinx,"Sunken Ship",dsunken,"Turtle Dungeon",dturtle;
+
+
+//----------------Towns----------------\\
+
+wprontera:	warp "prontera.gat",	156,	187;	close;
+wizlude:	warp "izlude.gat",	128,	111;	close;
+wgeffen:	warp "geffen.gat",	119,	66;	close;
+wgonryun:	warp "gon_fild01",	257,	78; close;
+wpayon:		warp "payon.gat",	96,	112;	close;
+wMorroc:	warp "morocc.gat",	159,	93;	close;
+walberta:	warp "alberta.gat",	27,	236;	close;
+waldebaran:	warp "aldebaran.gat",	145,	120;	close;
+wxmas:		warp "xmas.gat",	148,	131;	close;
+wcomodo:   	warp "comodo.gat",	188,	161;    close;
+wumbala:		warp "um_fild01.gat",45,284;	close;
+wyuno:   	warp "yuno.gat",	160,	168;    close;
+wamatsu:	warp "amatsu.gat",	197,	86;	close;
+wniflheim: warp "nif_fild01.gat",314,72;	close;
+//	mes "[พนักงานวาป]";	mes "กะลังตรวจสอบแมปจ้า"; 
+
+
+//----------------Dungeons----------------\\
+
+dculvert:	warp "prt_fild05.gat",	273,	210;	close;
+dpayon:		warp "pay_arche.gat",	43,	132;	close;
+dcoal:		warp "mjolnir_02.gat",	81,	359;	close;
+dglast:		warp "glast_01.gat",	368,	303;	close;
+dorc:		warp "gef_fild10.gat",	70,	332;	close;
+dsunken:	warp "alb2trea.gat",	75,	98;	close;
+dbibilan:	warp "izlu2dun.gat",	106,	88;	close;
+dant:		warp "moc_fild04.gat",	210,	328;	close;
+dsphinx:	warp "moc_fild19.gat",	107,	100;	close;
+dpyramids:	warp "moc_ruins.gat",	62,	162;	close;
+dmagma:		warp "yuno_fild03.gat",	39,	140;	close;
+dturtle:	warp "tur_dun01.gat",	149,	238;	close;
+
+}
+//===================================================================================[ Kafra ]
+monk_in.gat,103,181,4	script	Kafra	791,{	//117
+	cutin "kafra_02",2;
+	mes "[Kafra]";
+	mes "Welcome to Kafra Corp.We will stay with you wherever you go.";
+	next;
+	menu "Save",M0,"Use Storage",M1,"Rent a Cart",M2,"Use Kafra Pass",M3,"Other Information Check",M4,"Cancel",MEnd;
+
+	M0:
+		savepoint "monk_in.gat",99,178;
+		mes "[Kafra]";
+		mes "Your respawn point has saved. Thank you.";
+		cutin "kafra_02",255;
+		close;
+	M1:
+		if((Class==0) && (JobLevel < 6)) goto NeedJobLevel;
+		if(Zeny < 30) goto NeedZenys;
+		set Zeny,Zeny-30;
+		openstorage;
+		cutin "kafra_02",255;
+		close;
+
+                NeedJobLevel:
+                	mes "[Kafra]";
+                	mes "I am sorry but you have to be at least Novice level 6 if you want to use the storage.";
+                	cutin "kafra_02",255;
+                	close;
+                NeedZenys:
+	                mes "[Kafra]";
+                	mes "Dear. you don't have enough Money. The Storage fee is 30 Zeny.";
+                	cutin "kafra_02",255;
+                	close;
+	M2:
+		if((Class==5) || (Class==10)) goto UseCart;
+		mes "[Kafra]";
+		mes "I am sorry. The Cart service is only provided for Merchant and Blacksmith Class.";
+		cutin "kafra_02",255;
+		close;
+
+		UseCart:
+			mes "[Kafra]";
+			mes "The Cart Fee is 800 Zeny. Do you want to Rent a Cart?";
+			next;
+			menu "Rent a Cart.",RentCart,"Cancel.",RCCancel;
+
+			RentCart:
+				if(Zeny < 800) goto RCNeedZenys;
+				set Zeny,Zeny-800;
+				if((CheckCart)==0) goto NoSkill;
+				if((CheckCart)==1) goto GetCart;
+
+				NoSkill:
+					mes "[Kafra]";
+					mes "Under development.";
+					cutin "kafra_02",255;
+					close;					
+				GetCart:
+					setcart;
+					mes "[Kafra]";
+					mes "Thank you..";
+					cutin "kafra_02",255;
+					close;
+			RCNeedZenys:
+				mes "[Kafra]";
+				mes "Dear,you don't have enough Money. You need 800 Zeny.";
+				cutin "kafra_02",255;
+				close;
+		RCCancel:
+			cutin "kafra_02",255;
+			close;
+	M3:
+		if(countitem(1084) < 1) goto NeedKafraPass;
+		mes "[Kafra]";
+		mes "Now you are Using a Kapra's Pass.";
+//		delitem 1084,1;
+		next;
+		mes "[Kafra]";
+		mes "Under development";
+		cutin "kafra_06",255;
+		close;
+		
+		NeedKafraPass:
+			mes "[Kafra]";
+			mes "Dear you need at least 1 passport.";
+			cutin "kafra_02",255;
+			close;
+	M4:
+		menu "Special Reserve Check",L4a,"Cancel",L40End;
+
+		L4a:
+			mes "$CharName 's special reserve is $SpecialReserve.";
+			next;
+			mes "[Kafra]";
+			mes "You can exchange special reserve for goods at the head office of Kafra.";
+			mes "Please use our service for convenience and recive free goods with the special reserve.";
+			cutin "kafra_02",255;
+			close;
+		L40End:
+			cutin "kafra_02",255;
+			close;
+	MEnd:
+		cutin "kafra_02",255;
+		close;
+}
+//===================================================================================[ GOOD MAN ]
+// healของลุงแพะ โดย ตรูนี่แหละ 06/02/47 v.0.1
+// chage charactor to Deviruchi
+monk_in.gat,93,181,4	script	Healviruchi	738,		//736
+{
+					if (countitem(923) <1)		goto		L_end;
+					if (countitem(923) < 100)		goto		L_require;
+					if (countitem(923) > 99)		goto		L_ok;
+
+		L_require:	mes "[Healviruchi]";
+					mes "ว้าว! ท่านมี evil horn ด้วยนี่...";
+					mes "ข้าชอบมันมากๆ";
+					next;
+					mes "[Healviruchi]";
+					mes "ถ้าหากเจ้าหามาได้สัก 100 อัน";
+					mes "ข้าจะให้ของรักของหวงข้าแก่เจ้า";
+					goto L_end;
+
+		L_ok:		mes "[Healviruchi]";
+					mes "โอ้... เจ้าหามันมาได้จริงๆ";
+					mes "มันเป็นเขาที่งดงามจริงๆ";
+					mes "ขอมันให้ข้าเถอะแล้วข้าจะมอบของรักของข้าให้เจ้า";
+					next;
+					menu	"อืม...เอาไปสิ"				,L_change,
+							"ไม่ได้หรอก...ข้าจะเอาไปขาย"	,L_not_accept;
+					
+					L_change:	delitem 923,100;
+								mes "[Healviruchi]";
+								mes "ขอบใจเจ้ามาก...";
+								mes "เอ่า... เอาของรักของหวงของข้าไป";
+								getitem 7140,1;
+								goto L_end;
+
+					L_not_accept:	mes "[Healviruchi]";
+								mes "จ้าก!!";
+								mes "เอามาให้ข้าดีกว่าหน่ะ";
+								mes "ดีกว่าเอาไปขายตั้งเยอะนะ";
+								mes "-.-";
+								close;
+
+		L_end:		heal 9999,9999;
+					close;
+}

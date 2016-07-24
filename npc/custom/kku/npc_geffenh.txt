@@ -1,0 +1,121 @@
+//=== ผู้กล้าแห่ง Geffen [470704] ========================================================================//
+//	require ::	- geffenh.gat
+//		- IQ180.mp3
+//	470705	- packing monster in this file
+
+geffen.gat,123,111,4	script	ชายชรา	766,{
+
+				mes		"[ชายชรา]";
+	if (Sex == 1) 	mes		"สวัสดีเจ้าหนุ่มน้อย";
+	if (Sex == 2) 	mes		"สวัสดีหนูน้อย";
+				mes		"เจ้าว่าไหม? เมืองแห่งนี้สงบสุขดีจริงๆ";
+				next;
+				menu	"ข้าก็ว่าอย่างนั้น",-,"มันไม่ได้เกี่ยวกับข้า",L_bye;
+						mes		"[ชายชรา]";
+						mes		"ข้าอยู่ที่นี้มานานเกือบศตวรรษแล้ว";
+						mes		"เมืองแห่งนี้เต็มไปด้วยความหลังของตัวข้าเอง";
+						next;
+						menu	"ความหลังของตัวท่าน??",-,"ข้าต้องไปแล้ว...ไว้พบกันโอกาสหน้า",L_bye2;
+								mes		"[ชายชรา]";
+								mes		"ในอดีตเมืองแห่งนี้เคยเต็มไปด้วยปีศาจร้าย";
+								mes		"ข้าและสหายข้าใช้เวลาอยู่เกือบ 7 วัน";
+								mes		"จึงสามารถกำจัดปีศาจทั้งหมดลงได้...";
+								next;
+								mes		"[ชายชรา]";
+								mes		"....";
+								mes		"เจ้าอยากลองทดสอบเหตุการณ์นั้นดูไหม?";
+								next;
+								menu	"ข้าอยากสัมผัสกับมัน",-,"เอาไว้โอกาสหน้าดีกว่า",L_bye2;
+										mes		"[ชายชรา]";
+										mes		"เจ้าช่างมีจิตใจที่กล้าหาญนัก";
+										if(BaseLevel < 70) goto L_bye_Level;
+										mes		"ข้าขอชื่นชมเจ้าจากใจจริง";
+										mes		"เอาหล่ะ...หลับตาสิ";
+										mes		"...";
+										next;
+										set @warpgh,rand(4);
+										if(@warpgh==0) goto w1;
+										if(@warpgh==1) goto w2;
+										if(@warpgh==2) goto w3;
+										if(@warpgh==3) goto w4;
+										w1: warp "geffenh.gat",119,213; close;
+										w2: warp "geffenh.gat",26,119; close;
+										w3: warp "geffenh.gat",216,120; close;
+										w4: warp "geffenh.gat",120,32; close;
+
+										L_bye_Level:	mes		"แต่ร่างกายของเจ้ายังไม่พร้อม";
+													mes		"เจ้าจงกลับมาเมื่อเจ้าสามารถสวมใส่หูเอฟฟ์ได้";
+													mes		"เมื่อถึงตอนนั้น...";
+													mes		"ข้าจะพาเจ้าไปยังสถานที่ที่เจ้าต้องการ";
+													close;
+								
+								L_bye2:		mes		"[ชายชรา]";
+											mes		"ถ้าเช่นนั้น ก็ขอให้เจ้าโชคดี";
+											mes		"วันหลังก็แวะมาคุยกับคนแก่อีกนะ";
+											close;
+
+				L_bye:		mes		"[ชายชรา]";
+							mes		"ถ้าเช่นนั้น เชิญเจ้าไปตามทางของเจ้าเถิด";
+							mes		"ขออภัยที่ทำให้เจ้าเสียเวลา";
+							close;
+}
+
+geffenh.gat,120,108,5	script	...	723,{
+
+				mes		"[เสียงของชายชรา]";
+				mes		"เจ้าต้องการที่จะกลับรึยัง?";
+				next;
+				menu	"ข้าอยากกลับไปพักแล้ว",L_cback,"ยังหรอก...ข้ากำลังมันเลย",-;
+				mes		"[เสียงของชายชรา]";
+				mes		"โปรดเรียกข้า...ทันทีที่เจ้าต้องการ";
+				close;
+				L_cback:	warp "geffen.gat",123,108; close;
+}
+
+//======================================================================[ MONSTERS ]==============//
+geffenh.gat,0,0,0	monster	Lord of Death	1373,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Dark Snake Lord	1418,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Dracular	1389,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Spirit of Samurai	1492,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Baphomet	1039,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Dark Lord	1272,1,300000,600000,0
+geffenh.gat,0,0,0	monster	StrommyKnight	1251,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Pharaoh	1157,1,3600000,6000000,0
+geffenh.gat,0,0,0	monster	Osiris	1038,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Maya	1147,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Drake	1112,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Orc Lord	1190,1,300000,600000,0
+geffenh.gat,0,0,0	monster	Orc Hero	1087,1,300000,600000,0
+//-----------------------------------------------------------------------------------------------------------------------[mons :: Rank A]
+geffenh.gat,0,0,0	monster	Bloody knight	1268,2
+geffenh.gat,0,0,0	monster	Abysmal knight	1219,2
+geffenh.gat,0,0,0	monster	Chimera	1283,2
+
+geffenh.gat,0,0,0	monster	Zombie Master		1298,2
+geffenh.gat,0,0,0	monster	Skeleton General	 1290,2
+
+geffenh.gat,0,0,0	monster	Mutant dragon	1262,3
+geffenh.gat,0,0,0	monster	Mini Demon	1292,3
+geffenh.gat,0,0,0	monster	Khalizburg	1132,3
+geffenh.gat,0,0,0	monster	Apocalips	1365,3
+geffenh.gat,0,0,0	monster	Nightmare Terror	1379,3
+geffenh.gat,0,0,0	monster	Wanderer	1208,3
+geffenh.gat,0,0,0	monster	Gryphon	1259,3
+
+geffenh.gat,0,0,0	monster	Injustice	1257,5
+geffenh.gat,0,0,0	monster	Incubus	1374,5
+geffenh.gat,0,0,0	monster	Succubus	 1370,5
+geffenh.gat,0,0,0	monster	Elder	1377,5
+geffenh.gat,0,0,0	monster	Lava Golem	1366,5
+geffenh.gat,0,0,0	monster	Stalatic Golem	1278,5
+geffenh.gat,0,0,0	monster	Carat 	1267,5
+geffenh.gat,0,0,0	monster	Joker	1131,5
+geffenh.gat,0,0,0	monster	Zombie Prisoner	1197,5
+geffenh.gat,0,0,0	monster	Skeleton Prisoner	1196,5
+geffenh.gat,0,0,0	monster	Wraith	1192,5
+geffenh.gat,0,0,0	monster	Ghoul	1036,5
+geffenh.gat,0,0,0	monster	Wind Ghost	1263,5
+geffenh.gat,0,0,0	monster	Dark Frame	1260,5
+
+geffenh.gat,0,0,0	monster	Antique Firelock	1403,10
+geffenh.gat,0,0,0	monster	Greatest General	1277,10

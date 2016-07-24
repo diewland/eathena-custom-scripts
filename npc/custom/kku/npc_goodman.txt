@@ -1,0 +1,98 @@
+// jelopy แลก red โดย ตรูนี่แหละ 01/11/46 v.0.15
+// OBB แลก OAC โดย ตรูนี่แหละ 02/11/46 v.0.16
+// healแหลก โดย ตรูนี่แหละ 04/11/46 v.0.17
+// show number in MVP dungeon from Pramool. 03/04/47
+// zeny magic 03/04/47
+// remove magic to npc_zeny_magic 05/04/47
+// add function ADD Skill 04/07/47
+//=========================================================================>
+prontera.gat,154,189,5	script	ลูกผู้ชายตัวจริง	50,{
+			mes "[ลูกผู้ชายตัวจริง]";
+			mes "สวัสดีครับผมคือ ลูกผู้ชายตัวจริง";
+			mes "มีอะไรให้ช่วยไหมครับ?";
+	next;		
+	menu "แล้วทำไรได้มั่ง",-,"ไม่อ่ะ..ขอบใจ",L_EXIT;
+			menu	"Heal, please..."									,L_Heal,
+					"5*OBB = OCA"									,L_Card,
+					"FREE Quest Skill"									,L_Skill;
+//					"MVP Dungeon"									,L_GM_dun;
+//----------------------------------------------------------------------------------------------------------------------------------->
+	L_Heal:	mes "[ลูกผู้ชายตัวจริง]";
+			mes "ระวังๆหน่อย ข้ามะช่ายพรีสนะ";
+			mes "ฮีลบ่อยๆ SP หมดกันพอดี";
+			mes "ยิ่งมะมี SP Recover ด้วย...";
+			heal 9999,9999;
+			close;
+//----------------------------------------------------------------------------------------------------------------------------------->	
+	L_GM_dun:	mes "[ลูกผู้ชายตัวจริง]";
+				mes "ไปจิงอ่ะ?";
+				next;
+				menu "อืม !!",-,"พูดเล่น...",L_SUB_EX1;
+				warp "monk_in",99,181;close;
+
+				L_SUB_EX1:		
+				mes "[ลูกผู้ชายตัวจริง]";
+				mes "ไว้คราวหน้าก็ได้";	
+				mes "บ๊าย บาย....";	
+				close;
+//----------------------------------------------------------------------------------------------------------------------------------->
+	L_Card:		if (countitem(603) <5) goto L_SUB_EX2;
+				mes "[ลูกผู้ชายตัวจริง]";
+				mes "OCA 1 เล่มใช้ OBB 5 กล่อง";
+				mes "ท่านต้องการกี่เล่ม??";
+				next;
+				input @NUM;
+				if(@NUM<1) goto L_EXIT;
+				if(@NUM>countitem(603)/5) goto L_SUB_EX3;
+				//if(Zeny < @NUM*5000) goto L_SUB_MONEY;
+				//set Zeny,Zeny-(@NUM*5000);
+				delitem 603,@NUM*5;
+				getitem 616,@NUM;
+
+				mes "[ลูกผู้ชายตัวจริง]";
+				mes "เอ้านี่ Old Card Album";
+				mes "ขอให้โชคดีนะ";
+				close;
+
+				L_SUB_EX2:		
+				mes "[ลูกผู้ชายตัวจริง]";
+				mes "Old Blue คุณคงเกลี้ยงแล้ว";	
+				mes "คราวหน้าเอามาแลกใหม่ได้นะ";	
+				mes "โชคดีครับ";	
+				close;
+				
+				L_SUB_EX3:		
+				mes "[ลูกผู้ชายตัวจริง]";
+				mes "เสียใจด้วยคับ";
+				mes "OBB คุณไม่เพียงพอ";	
+				close;
+
+				L_SUB_MONEY:		
+				mes "[ลูกผู้ชายตัวจริง]";
+				mes "เสียใจด้วยคับ";
+				mes "ตังของคุณไม่พอนะคับ";
+				close;
+
+//----------------------------------------------------------------------------------------------------------------------------------->
+	L_Skill:	mes "[ลูกผู้ชายตัวจริง]";
+			mes 	"รับไปเลย...";
+			if (Class == Job_Novice) goto L_Novice;
+			if ((Class == Job_Swordman) || (Class == Job_Knight) || (Class == Job_Knight2) || (Class == Job_Crusader) || (Class == Job_Crusader2)) goto L_Sword;
+			if ((Class == Job_Archer) || (Class == Job_Hunter) || (Class == Job_Bard) || (Class == Job_Dancer)) goto L_Archer;
+			if ((Class == Job_Thief) || (Class == 12) || (Class == 17)) goto L_Thief;
+			if ((Class == Job_Merchant) || (Class == Job_Blacksmith) || (Class == Job_Alchem)) goto L_Merchant;
+			if ((Class == Job_Acolyte) || (Class == Job_Priest) || (Class == Job_Monk)) goto L_Acolyte;
+			if ((Class == Job_Mage) || (Class == Job_Wizard) || (Class == Job_Sage)) goto L_Mage;
+			L_Novice:		skill 142,1,0;	skill 143,1,0;	goto L_End;
+			L_Sword:		skill 144,1,0;	skill 145,1,0;	skill 146,1,0;	goto L_End;
+			L_Archer:		skill 147,1,0;	skill 148,1,0;	goto L_End;
+			L_Thief:		skill 149,1,0;	skill 150,1,0;	skill 151,1,0;	skill 152,1,0;	goto L_End;
+			L_Merchant:	skill 153,1,0;	skill 154,1,0;	skill 155,1,0;	goto L_End;
+			L_Acolyte:	skill 156,1,0;	goto L_End;
+			L_Mage:		skill 157,1,0;	goto L_End;
+	L_End:	close;
+//----------------------------------------------------------------------------------------------------------------------------------->
+	L_EXIT:		mes "[ลูกผู้ชายตัวจริง]";
+				mes "โอเช มะเปงรายย";
+				close;
+}

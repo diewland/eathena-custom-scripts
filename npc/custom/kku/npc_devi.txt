@@ -1,0 +1,40 @@
+monk_in.gat,93,181,4	script	Healviruchi	738,		//736
+{
+					if (countitem(923) <1)		goto		L_end;
+					if (countitem(923) < 100)		goto		L_require;
+					if (countitem(923) > 99)		goto		L_ok;
+
+		L_require:	mes "[Healviruchi]";
+					mes "ว้าว! ท่านมี evil horn ด้วยนี่...";
+					mes "ข้าชอบมันมากๆ";
+					next;
+					mes "[Healviruchi]";
+					mes "ถ้าหากเจ้าหามาได้สัก 100 อัน";
+					mes "ข้าจะให้ของรักของหวงข้าแก่เจ้า";
+					goto L_end;
+
+		L_ok:		mes "[Healviruchi]";
+					mes "โอ้... เจ้าหามันมาได้จริงๆ";
+					mes "มันเป็นเขาที่งดงามจริงๆ";
+					mes "ขอมันให้ข้าเถอะแล้วข้าจะมอบของรักของข้าให้เจ้า";
+					next;
+					menu	"อืม...เอาไปสิ"				,L_change,
+							"ไม่ได้หรอก...ข้าจะเอาไปขาย"	,L_not_accept;
+					
+					L_change:	delitem 923,100;
+								mes "[Healviruchi]";
+								mes "ขอบใจเจ้ามาก...";
+								mes "เอ่า... เอาของรักของหวงของข้าไป";
+								getitem 7140,1;
+								goto L_end;
+
+					L_not_accept:	mes "[Healviruchi]";
+								mes "จ้าก!!";
+								mes "เอามาให้ข้าดีกว่าหน่ะ";
+								mes "ดีกว่าเอาไปขายตั้งเยอะนะ";
+								mes "-.-";
+								close;
+
+		L_end:		heal 9999,9999;
+					close;
+}

@@ -1,0 +1,175 @@
+//NPC Add Skill By Me แก้จากภาษาขอมเพื่อเพื่อนๆ (XOX")!!! [6ธค46]
+//แก้ไขเรียบร้อย 7 ธค 46
+//add ไพ่ป๊อก89 credit batmaner 04/04/47
+//change npc to Korea mask 05/04/47
+//fixed deal money not over 1,000,000
+
+prontera.gat,149,192,5	script	ลูกผู้ชายตัวปลอม	772,{
+
+	mes		"[ลูกผู้ชายตัวปลอม]";
+	mes		"หวาดดี ตูคือลูกผู้ชายตัวปลอม";
+	mes		"เล่นไพ่ป๊อกไหม??";
+	next;
+	menu	"เย่",L_Pok,"โน่ว",Lcancel;
+//--------------------------------------------------------------------------------------------------------------------->
+	L_Pok:
+
+	mes		"[ลูกผู้ชายตัวปลอม]";
+	emotion 2;
+	mes "จะเล่นแน่นะ??";
+	next;
+	menu "เอ่อ...ดิ",Lgo,"ขอรายละเอียดหน่อย",Ldetail,"ไม่ล่ะ",Lcancel;
+
+	Lgo:		if ( Zeny == 0) goto Lzenyenough;
+
+	mes		"[ลูกผู้ชายตัวปลอม]";
+	mes		"จะเล่นเท่าไร??";
+			next;
+			input @play;
+
+			if ( @play <0 ) goto Lzenyenough;			// input negative money
+			if ( @play == 0 ) goto Lzenyenough;		// input 0 zeny
+			if ( Zeny < @play) goto  Lzenyenough;		// input over money
+			if ( @play > 1000000 ) goto LzenyOver;		// input over 1 million
+
+	mes		"[ลูกผู้ชายตัวปลอม]";
+	mes		"เอ้า รับไป นี่คือไพ่ใบแรกของเจ้า";
+	next;
+
+	set @dickcard1, rand(0,9);
+
+	//mes "[" +strcharinfo(0) +"]";
+	mes	"[ลูกผู้ชายตัวปลอม]";
+	mes "ใบแรกได้^FF0000 " + @dickcard1 +" ^000000แต้ม ";
+	mes "ส่วนไพ่ใบที่สอง.... ";
+	next;
+
+	set @dickcard2, rand(0,9);
+	set @headcard, rand(0,9);
+
+	//mes "[" +strcharinfo(0) +"]";
+	mes	"[ลูกผู้ชายตัวปลอม]";
+	mes "ใบแรกได้^FF0000 " + @dickcard1 +" ^000000แต้ม  ";
+	mes "ส่วนไพ่ใบที่สองได้ ^FF0000"+ @dickcard2 +"^000000 แต้ม";
+	//next;
+
+	set @dickall, @dickcard1 + @dickcard2;
+
+	if (@dickall < 10 ) goto Lresult11;
+	if (@dickall < 20 ) goto Lresult12;
+
+	Lresult11:
+
+	if (@dickall > @headcard) goto Lueat11;
+	if (@dickall < @headcard) goto Lupay11;
+	if (@dickall == @headcard) goto Lduel11;
+
+	Lueat11:
+	emotion 28;
+	//mes	"[ลูกผู้ชายตัวปลอม]";
+	//mes "ไพ่ใบแรกได้ ^FF0000" + @dickcard1 +"^000000 แต้ม";
+	//mes "ไพ่ใบที่สองได้ ^FF0000" + @dickcard2 +"^000000 แต้ม ";
+	mes "รวมเป็น ^FF8040" + @dickall + "^000000 แต้ม";
+	mes "ส่วนของข้าได้ ^0000FF" + @headcard + "^000000  แต้ม";
+	mes "โอ้ย.... เจ้าชนะข้าได้ไง คราวหน้าข้าไม่ยอมแน่";
+	//next;
+	set Zeny,Zeny+@play;
+	close;
+
+	Lupay11:
+	emotion 14;
+	//mes	"[ลูกผู้ชายตัวปลอม]";
+	//mes "ไพ่ใบแรกได้ ^FF0000" + @dickcard1 +"^000000 แต้ม";
+	//mes "ไพ่ใบที่สองได้ ^FF0000" + @dickcard2 +"^000000 แต้ม ";
+	mes "รวมเป็น ^FF8040" + @dickall + "^000000 แต้ม";
+	mes "ส่วนของข้าได้ ^0000FF" + @headcard + "^000000  แต้ม";
+	mes "555 เจ้ามือกินเรียบ 5555";
+	//next;
+	set Zeny,Zeny-@play;
+	if ( Zeny == 0 ) goto Lnozeny;
+	close;
+
+	Lduel11:
+	//mes	"[ลูกผู้ชายตัวปลอม]";
+	//mes "ไพ่ใบแรกได้ ^FF0000" + @dickcard1 +"^000000 แต้ม";
+	//mes "ไพ่ใบที่สองได้ ^FF0000" + @dickcard2 +"^000000 แต้ม ";
+	mes "รวมเป็น ^FF8040" + @dickall + "^000000 แต้ม";
+	mes "ส่วนของข้าได้ ^0000FF" + @headcard + "^000000  แต้ม";
+	mes "555 เสมอกันไป เจอกันใหม่ได้นะ";
+	close;
+
+	Lresult12:
+	set @dickalla, @dickall - 10;
+
+	if (@dickalla > @headcard) goto Lueat12;
+	if (@dickalla < @headcard) goto Lupay12;
+	if (@dickalla == @headcard) goto Ldual12;
+
+	Lueat12:
+	emotion 28;
+	//mes	"[ลูกผู้ชายตัวปลอม]";
+	//mes "ไพ่ใบแรกได้ ^FF0000" + @dickcard1 +"^000000 แต้ม";
+	//mes "ไพ่ใบที่สองได้ ^FF0000" + @dickcard2 +"^000000 แต้ม ";
+	mes "รวมเป็น ^FF8040" + @dickall + "^000000 แต้ม";
+	mes "ส่วนของข้าได้ ^0000FF" + @headcard + "^000000  แต้ม";
+	mes "โอ้ย.... เจ้าชนะข้าได้ไง คราวหน้าข้าไม่ยอมแน่";
+	//next;
+	set Zeny,Zeny+@play;
+	close;
+
+	Lupay12:
+	emotion 14;
+	//mes	"[ลูกผู้ชายตัวปลอม]";
+	//mes "ไพ่ใบแรกได้ ^FF0000" + @dickcard1 +"^000000 แต้ม";
+	//mes "ไพ่ใบที่สองได้ ^FF0000" + @dickcard2 +"^000000 แต้ม ";
+	mes "รวมเป็น ^FF8040" + @dickall + "^000000 แต้ม";
+	mes "ส่วนของข้าได้ ^0000FF" + @headcard + "^000000  แต้ม";
+	mes "555 เจ้ามือกินเรียบ 5555";
+	//next;
+	set Zeny,Zeny-@play;
+	if ( Zeny == 0 ) goto Lnozeny;
+	close;
+
+	Ldual12:
+	//mes	"[ลูกผู้ชายตัวปลอม]";
+	//mes "ไพ่ใบแรกได้ ^FF0000" + @dickcard1 +"^000000 แต้ม";
+	//mes "ไพ่ใบที่สองได้ ^FF0000" + @dickcard2 +"^000000 แต้ม ";
+	mes "รวมเป็น ^FF8040" + @dickall + "^000000 แต้ม";
+	mes "ส่วนของข้าได้ ^0000FF" + @headcard + "^000000  แต้ม";
+	mes "555 เสมอกันไป เจอกันใหม่ได้นะ";
+	close;
+
+	Lnozeny:
+	announce "555 ผู้เล่น [ " + strcharinfo(0) + " ] ได้เสียพนันไพ่ป๊อก หมดตูดคร๊าบ ..... /gg ",8;
+	close;
+
+	Ldetail:
+	emotion 5;
+	mes	"[ลูกผู้ชายตัวปลอม]";
+	mes "เคยเล่น ป็อก 8 ป๊อก 9 ไหม";
+	mes "แต่คราวนี้จะเปิดเลย ไม่มีจั่วไพ่";
+	mes "เอ่อ...ลงได้ไม่เกินล้านนึงนะ เดี๋ยวไม่มีตังจ่าย";
+	close;
+
+	Lzenyenough:
+	emotion 19;
+	mes	"[ลูกผู้ชายตัวปลอม]";
+	mes "ไม่มีตังแล้วอย่ามาเด๋อ";
+	close;
+
+	LzenyOver:
+	emotion 19;
+	mes	"[ลูกผู้ชายตัวปลอม]";
+	mes "ลงได้ที่ละไม่เกินล้านเฟ้ย...";
+	close;
+
+	Lcancel:
+	emotion 5;
+	mes	"[ลูกผู้ชายตัวปลอม]";
+	mes "กลัวหมดตูดล่ะสิ 5555";
+	close;
+
+OnInit:
+	waitingroom "ไพ่ป๊อก",0;
+	end;
+}
